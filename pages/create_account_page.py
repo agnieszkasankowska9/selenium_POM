@@ -11,6 +11,7 @@ class Locators:
     FIRST_NAME = (By.ID, "customer_firstname")
     GENDER_MALE = (By.XPATH, '//label[@for="id_gender1"]')
     GENDER_FEMALE = (By.XPATH, '//label[@for="id_gender2"]')
+    EMAIL = (By.ID, 'email')
 
 
 class CreateAccountPage(BasePage):
@@ -29,6 +30,14 @@ class CreateAccountPage(BasePage):
 
     def enter_first_name(self, first_name):
         self.driver.find_element(*Locators.FIRST_NAME).send_keys(first_name)
+
+
+    def get_entered_email(self):
+        """
+        email entered on previous page
+        :return:
+        """
+        return self.driver.find_element(*Locators.EMAIL).get_attribute("value")
 
 
     def _verify_page(self):
