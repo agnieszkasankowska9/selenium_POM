@@ -1,6 +1,8 @@
-from pages.base_page import BasePage
-from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 from pages.create_account_page import CreateAccountPage
+from selenium.webdriver.common.by import By
+from pages.base_page import BasePage
 
 
 class Locators:
@@ -21,3 +23,6 @@ class AuthenticationPage(BasePage):
         """
         self.driver.find_element(*Locators.CREATE_ACCOUNT_BTN).click()
         return CreateAccountPage(self.driver)
+
+    def _verify_page_title(self):
+        WebDriverWait(self.driver, 10).until(EC.title_is("Login - PrestaShop"))
