@@ -1,6 +1,3 @@
-from selenium.webdriver.support.wait import WebDriverWait
-
-
 class BasePage:
     """
     Base Page Object for each page
@@ -11,5 +8,5 @@ class BasePage:
 
     def _verify_page(self):
         # site autotest
-        pass
+        return
 

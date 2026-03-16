@@ -6,6 +6,9 @@ from pages.base_page import BasePage
 
 
 class Locators:
+    """
+    Authentication Page Locators
+    """
     CREATE_ACCOUNT_EMAIL = (By.ID, "email_create")
     CREATE_ACCOUNT_BTN = (By.ID, "SubmitCreate")
 
@@ -14,15 +17,18 @@ class AuthenticationPage(BasePage):
     Authentication Page Object
     """
     def enter_create_account_email(self, email):
+        """
+        Enter email for new user registration
+        """
         self.driver.find_element(*Locators.CREATE_ACCOUNT_EMAIL).send_keys(email)
 
     def click_create_account(self):
         """
         Click create account button
-        :return:
+        :return: Create AccountPage Object
         """
         self.driver.find_element(*Locators.CREATE_ACCOUNT_BTN).click()
         return CreateAccountPage(self.driver)
 
-    def _verify_page_title(self):
+    def _verify_page(self):
         WebDriverWait(self.driver, 10).until(EC.title_is("Login - PrestaShop"))
