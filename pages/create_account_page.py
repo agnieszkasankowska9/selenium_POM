@@ -1,10 +1,11 @@
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.by import By
-from utils.custom_types import Gender
-from pages.base_page import BasePage
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.select import Select
 
+from pages.base_page import BasePage
+from time import sleep
+from utils.custom_types import Gender
 
 class Locators:
     """
@@ -32,10 +33,12 @@ class CreateAccountPage(BasePage):
         """
         Choose Mr or Mrs
         """
-        if gender == Gender.MALE:
+        if gender == Gender.MALE or gender == "male":
             self.driver.find_element(*Locators.GENDER_MALE).click()
-        else:
+        elif gender == Gender.FEMALE or gender == "female":
             self.driver.find_element(*Locators.GENDER_FEMALE).click()
+        else:
+            raise ValueError("Gender must be either MALE or FEMALE")
 
     def enter_first_name(self, first_name):
         """
